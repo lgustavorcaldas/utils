@@ -13,7 +13,7 @@ module.exports = {
       }
     });
   }
-}
+};
 
 // // write a JSON jile
 // const newObj = {
