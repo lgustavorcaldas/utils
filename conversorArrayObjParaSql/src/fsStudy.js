@@ -2,15 +2,22 @@ const fs = require('fs');
 
 module.exports = {
   jsonReader: (filePath, callBack) => {
-    if( !fs.existsSync(filePath) ) return callBack({ ERROR: 'filePath doesnt exist!' }) && console.error({ ERROR: 'filePath doesnt exist!' });
+    if( !fs.existsSync(filePath) ) return callBack({ errorMessage: 'filePath doesnt exist!' }) && console.error({ errorMessage: 'filePath doesnt exist!' });
     fs.readFile(filePath, 'utf-8', ( error , fileData ) => {
-      if ( error || !fileData ) return callBack(error) && console.error({ ERROR: 'fileData doesnt exist!' });
+      if ( error || !fileData ) return callBack(error) && console.error({ errorMessage: 'fileData doesnt exist!' });
       try {
         const data = JSON.parse(fileData);
-        return true && callBack && callBack(null, data);
+        console.log({ successMessage: 'Everything worked well!' });
+        return callBack(null, data) 
       } catch (error) {
-        return callBack(error) && console.error({ ERROR: fileData });
+        return callBack(error) && console.error({ errorMessage: error });
       }
+    });
+  },
+  writerSql: (filePath, data)  => {
+    fs.writeFile(filePath, data, (error)  => {
+      if (error) return error && console.error({ errorMessage: 'File error!', error });
+      console.log({ successMessage: 'Everything worked well!!' });
     });
   }
 };
