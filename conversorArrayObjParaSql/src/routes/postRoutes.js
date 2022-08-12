@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
   try {
     jsonReader(tempFilePath, ( error, data ) => {
       if ( error || !data ) return res.status(400).json({ message: 'Reading file error!' });
-      data.slice(0,10).map( ( element )  => {
+      data.map( ( element )  => {
         element.password = hashPwd(element.password);
         const elementKeys = Object.keys(element).map( keys =>  keys = ` ${keys}`);
         const elementValues = Object.values(element).map( values =>  values = ` '${values}'` );
