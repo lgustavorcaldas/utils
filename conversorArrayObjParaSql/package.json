@@ -1,11 +1,13 @@
 {
-  "name": "fsstudy",
+  "name": "conversor",
   "version": "1.0.0",
   "description": "",
-  "main": "fsStudy.js",
+  "main": "src/app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon main",
+    "docker:down": "docker-compose -f './docker-compose.yml' down",
+    "docker:up": "docker-compose -f './docker-compose.yml' up -d --build api-dev",
+    "docker:run": "npm run docker:down; npm run docker:up; docker-compose logs -f api-dev"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
     "fs": "^0.0.1-security",
     "nodemon": "^2.0.19"
   }

@@ -1,11 +1,14 @@
 const EXPRESS = require('express');
 const router = EXPRESS.Router();
 
-const { hashPwd } = require('../src/bcrypt');
-const { jsonReader, writerSql } = require('../src/fsStudy');
+const { hashPwd } = require('../utils/bcrypt');
+const { jsonReader, writerSql } = require('../utils/fsStudy');
 
-router.get('/', (req, res) => {
-  const { filePath, tableName } = req.body;
+router.post('/', (req, res) => {
+  console.log("🚀 ~ file: getRoutes.js ~ line 9 ~ router.post ~ req.files", req.files)
+  const filePath = req.files.foo.tempFilePath;
+  const { tableName } = req.body;
+  console.log("🚀 ~ file: getRoutes.js ~ line 9 ~ router.get ~ filePath", filePath)
   let sqlFile = ``;
   try {
     jsonReader(filePath, ( error, data ) => {
