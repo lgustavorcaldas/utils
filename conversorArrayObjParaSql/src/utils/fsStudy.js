@@ -15,7 +15,7 @@ module.exports = {
     });
   },
   writerSql: (filePath, data)  => {
-    fs.writeFile(filePath, data, (error)  => {
+    fs.writeFileSync(filePath, data, (error)  => {
       if (error) return error && console.error({ errorMessage: 'File error!', error });
       console.log({ successMessage: 'Everything worked well!!' });
     });

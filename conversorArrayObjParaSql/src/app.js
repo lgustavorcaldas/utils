@@ -1,16 +1,20 @@
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const bodyParser = require('body-parser');
 const app = express();
+const path = __dirname;
 const port = 8080;
 
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
 app.use(fileUpload({
   useTempFiles: true,
-  tempFileDir: '/tmp'
-}))
+  tempFileDir: __dirname + '/tmp'
+}));
 
-const GET_ROUTES = require('./routes/getRoutes');
+const POST_ROUTES = require('./routes/postRoutes');
 
-app.use("/", GET_ROUTES);
+app.use("/", express.static(path + '/public'));
+app.use("/conversor", POST_ROUTES);
 
 app.listen(port, console.log("Listening to port: " + port));
